@@ -7,119 +7,65 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+
 import Link from 'next/link'
 
+import { CompanyExperience, Position } from '@/types'
+import { formatDate, dateDelta } from "@/lib/utils"
+import { contact, email, siteUrl, skilledAt, workExperience, } from "@/data"
 
-type WorkExperience = {
-  title: string,
-  fromDate: Date,
-  toDate?: Date,
-  company: string,
-  location: string,
-  description: string,
-  breakPage: boolean,
-}
-
-// create a function that receives a date and return a string like "Jul 2019"
-function formatDate(date: Date | undefined) {
-  return date
-    ? date.toLocaleDateString("en-US", { month: "short", year: "numeric" })
-    : undefined
-}
-
-function WorkExperienceItem(props: { workExperience: WorkExperience, }) {
+function WorkExperienceContainer(props: { workExperience: CompanyExperience[] }) {
   return (
-    <div className={props.workExperience.breakPage ? "break-after-page" : ""}>
+    <div className="mt-8">
+      {
+        props.workExperience.map((companyExperience, index) => (
+          <CompanyExperience key={index} experience={companyExperience} />
+        ))
+      }
+    </div>
+  )
+}
 
-      <Card className="m-2 hover:bg-gray-100">
-        <CardHeader>
-          <CardTitle>{props.workExperience.title}</CardTitle>
-          <div className="flex flex-row justify-between">
-            <CardDescription>{props.workExperience.company}</CardDescription>
-            <CardDescription>
-              {formatDate(props.workExperience.fromDate)} - {formatDate(props.workExperience.toDate) ?? "Present"}
-            </CardDescription>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <p className="text-xs">{props.workExperience.description}</p>
-        </CardContent>
-      </Card>
+function CompanyExperience(props: { experience: CompanyExperience, }) {
+
+  return (
+    <div className={props.experience.breakPage ? "mb-4 flex flex-row break-after-page" : "mb-4 flex flex-row"}>
+      <h1 className="p-2 w-1/6 font-semibold text-right text-md mr-4">
+        {props.experience.company}
+      </h1>
+
+      <div className="w-5/6">
+        {
+          props.experience.positions.map((position, index) => {
+            const { years, months } = dateDelta(position.fromDate, position.toDate ?? new Date())
+
+            return (
+              <div key={index} className="p-2 mb-4 hover:bg-gray-100">
+                <div className="mx-2">
+                  <div>{position.title}</div>
+                  <div className="flex flex-row justify-between">
+                    <CardDescription>{position.location}</CardDescription>
+                    <CardDescription>
+                      {formatDate(position.fromDate)} - {formatDate(position.toDate) ?? "Present"}
+                      {years > 0 && <span className="mx-2">{`(${years} years)`}</span>}
+                    </CardDescription>
+                  </div>
+                </div>
+
+                <div className="m-2 text-xs">{position.description}</div>
+              </div>
+            )
+
+          })
+        }
+      </div>
+
     </div>
   )
 }
 
 
 export default function Home() {
-  const email = "agarrido@gmail.com"
-  const siteUrl = "https://agrrd.github.io"
-  const contact = "Buenos Aires, Argentina, GMT-3"
-  const skilledAt = [
-    "Designing, managing and troubleshooting networks",
-    "Managing Linux based infrastructures",
-    "Automating with Python, Docker, Ansible, Jenkins, and GitLab",
-    "Analyzing data with SQL",
-    "Building command line apps in Python",
-    "Creating web based tools in JavaScript",
-  ]
-
-  const workExperience: WorkExperience[] = [
-    {
-      title: "Network Specialist",
-      company: "Independent Consultant",
-      fromDate: new Date(2019, 6, 1),
-      toDate: undefined,
-      location: "Buenos Aires, Argentina.",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: true,
-    },
-    {
-      title: "Network Specialist",
-      company: "Independent Consultant",
-      fromDate: new Date(2029, 6, 1),
-      toDate: undefined,
-      location: "Buenos Aires, Argentina.",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: false,
-    },
-    {
-      title: "Network Specialist",
-      company: "Independent Consultant",
-      fromDate: new Date(2019, 6, 1),
-      toDate: undefined,
-      location: "Buenos Aires, Argentina.",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: false,
-    },
-    {
-      title: "Network Specialist",
-      company: "Independent Consultant",
-      fromDate: new Date(2019, 6, 1),
-      toDate: undefined,
-      location: "Buenos Aires, Argentina.",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: false,
-    },
-    {
-      title: "Network Specialist",
-      company: "Independent Consultant",
-      fromDate: new Date(2019, 6, 1),
-      toDate: undefined,
-      location: "Buenos Aires, Argentina.",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: false,
-    },
-    {
-      title: "Solution Architect",
-      company: "Intraway Corporation",
-      fromDate: new Date(2015, 3, 1),
-      toDate: new Date(2019, 6, 1),
-      location: "Buenos Aires, Argentina",
-      description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Unde architecto nulla eius sint maxime illum, dolorem quibusdam repudiandae accusantium et incidunt, illo veritatis obcaecati maiores, totam quis dolores doloribus recusandae!  Voluptas, excepturi sint cupiditate, beatae ullam suscipit corporis obcaecati vel quos commodi quae harum iste dolorum exercitationem. Nostrum, id. Ipsam dolorum id quibusdam est sunt eaque deserunt fuga iste dicta?  Aut voluptatibus veniam ducimus? Consectetur neque nostrum, nobis inventore laudantium libero atque ut quos eveniet fuga. Veniam expedita, dolorem eveniet iure cumque qui beatae fugiat repellat dignissimos rerum quia natus!  Expedita ullam numquam vitae quia modi deserunt laborum labore et blanditiis, qui quibusdam necessitatibus sed perspiciatis aperiam commodi doloribus recusandae voluptas ratione sapiente! Aut excepturi adipisci necessitatibus aperiam cum repellendus.  Ut non alias officia eaque quos. Sequi ipsum qui error sunt illo minima modi excepturi inventore labore fugiat, culpa nobis repudiandae temporibus corrupti rem perferendis eius voluptatum, enim nesciunt in!  Exercitationem perferendis ipsa, consequuntur quod eveniet vel doloremque facilis perspiciatis facere dicta explicabo consequatur cum voluptas praesentium id, laborum commodi neque accusamus architecto expedita distinctio sunt harum cumque! Labore, nisi!  Quisquam, soluta! Aliquid aliquam optio enim eligendi necessitatibus reprehenderit similique, doloremque sint quas dolorum beatae possimus quos nobis sed delectus ad! Reiciendis odio, possimus atque recusandae fugit optio porro expedita.  Itaque quam cumque repudiandae accusantium. Dolorum tenetur assumenda recusandae inventore eos cupiditate tempora rerum aperiam dolorem quaerat harum, suscipit, officia laudantium, consectetur repudiandae itaque autem molestiae numquam. Rem, eum et?  Harum, accusantium. Ducimus doloribus minus deserunt odio quidem corrupti exercitationem ratione praesentium dolore repudiandae et hic dolor quo laboriosam accusamus iusto, earum fugiat labore consequatur assumenda optio dignissimos rem iure.  Sint, libero! Quia, voluptatem ratione ab optio adipisci officiis doloribus, fugiat molestiae, aliquid eum recusandae obcaecati itaque provident maiores atque debitis quisquam voluptate dolore laudantium repellendus tempore rerum? Eos, quidem.",
-      breakPage: false,
-    }
-  ]
-
   return (
     <>
       <title>Alberto Garrido</title>
@@ -129,19 +75,22 @@ export default function Home() {
             <h1 className="font-semibold text-2xl">
               Alberto Garrido
             </h1>
+            <h1 className="font-semibold text-xl">
+              Solution Architect
+            </h1>
 
-            <h3 className="font-light text-lg">
+            <h3 className="font-light text-sm">
               {contact}
             </h3>
 
-            <h3 className="font-light text-lg underline">
+            <h3 className="font-light text-sm underline">
               <a href={`mailto:${email}`}>
                 {email}
               </a>
             </h3>
 
-            <Link href="https://github.com/agrrd/cv" >
-              <span className="underline">
+            <Link href={siteUrl} >
+              <span className="text-sm underline">
                 {siteUrl}
               </span>
             </Link>
@@ -156,7 +105,7 @@ export default function Home() {
         <section>
           {/*       background section */}
           <ul className="text-xs mt-6">
-            <li className="flex flex-row gap-2">
+            <li className="flex flex-row gap-2 mb-2">
               <div className="w-32 uppercase font-semibold">Education</div>
               <div>Bachiller. Nacional Superior N°6 Vicente López, 1998, Buenos Aires, Argentina.</div>
             </li>
@@ -192,11 +141,7 @@ export default function Home() {
             Work Experience
           </h2>
 
-          <ul>
-            {workExperience.map((workExperience, index) => (
-              <WorkExperienceItem key={index} workExperience={workExperience} />
-            ))}
-          </ul>
+          <WorkExperienceContainer workExperience={workExperience} />
         </section>
 
       </div >

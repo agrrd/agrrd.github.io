@@ -52,6 +52,7 @@ function WorkExperienceItem(props: { workExperience: WorkExperience, }) {
 
 export default function Home() {
   const email = "agarrido@gmail.com"
+  const siteUrl = "https://agrrd.github.io"
   const contact = "Buenos Aires, Argentina, GMT-3"
   const skilledAt = [
     "Designing, managing and troubleshooting networks",
@@ -141,7 +142,7 @@ export default function Home() {
 
             <Link href="https://github.com/agrrd/cv" >
               <span className="underline">
-                https://github.com/agrrd/cv
+                {siteUrl}
               </span>
             </Link>
           </div>
@@ -156,11 +157,11 @@ export default function Home() {
           {/*       background section */}
           <ul className="text-xs mt-6">
             <li className="flex flex-row gap-2">
-              <div className="uppercase font-semibold">Education</div>
+              <div className="w-32 uppercase font-semibold">Education</div>
               <div>Bachiller. Nacional Superior N°6 Vicente López, 1998, Buenos Aires, Argentina.</div>
             </li>
             <li className="flex flex-row gap-2">
-              <div className="uppercase font-semibold">Languages</div>
+              <div className="w-32 uppercase font-semibold">Languages</div>
               <div>English: Fluent. Spanish: Native</div>
             </li>
           </ul>

@@ -23,7 +23,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
         fromDate={new Date(2021, 0, 1)}
         toDate={undefined}
         breakPage={false}
-        position="Network Specialist"
+        position="Network Specialist Consultant"
         location="Buenos Aires, Argentina"
       >
         <text>
@@ -70,7 +70,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
           </li>
         </ul>
-        
+
       </CompanyExperienceComponent>
 
       <CompanyExperienceComponent
@@ -98,7 +98,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
           </li>
         </ul>
-        
+
       </CompanyExperienceComponent>
 
       <CompanyExperienceComponent
@@ -126,7 +126,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
           </li>
         </ul>
-        
+
       </CompanyExperienceComponent>
 
       <CompanyExperienceComponent
@@ -154,7 +154,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
           </li>
         </ul>
-        
+
       </CompanyExperienceComponent>
 
       <CompanyExperienceComponent
@@ -162,7 +162,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
         fromDate={new Date(2015, 0, 1)}
         toDate={new Date(2019, 0, 1)}
         breakPage={false}
-        position="NOC Engineer"
+        position="NOC Operator"
         location="Buenos Aires, Argentina"
       >
         <text>
@@ -182,7 +182,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
           </li>
         </ul>
-        
+
       </CompanyExperienceComponent>
     </div>
   )
@@ -202,14 +202,14 @@ function CompanyExperienceComponent(props: CompanyExperienceComponentProps) {
   const { years, months } = dateDelta(props.fromDate, props.toDate ?? new Date())
 
   return (
-    <div className={props.breakPage ? "flex flex-row break-after-page" : "flex flex-row"}>
-      <h1 className="text-right p-2 w-1/6 font-semibold text-md mr-4">
+    <div className={props.breakPage ? "md:flex md:flex-row break-after-page hover:bg-gray-200" : "md:flex md:flex-row hover:bg-gray-200"}>
+      <h1 className="md:text-right p-2 md:w-1/6 font-semibold text-md mr-4">
         {props.company}
       </h1>
 
-      <div className="w-5/6">
+      <div className="md:w-5/6">
         <div className="p-2 mb-4">
-          <div className="mx-2">
+          <div className="md:mx-2">
             <div>{props.position}</div>
             <div className="flex flex-row justify-between">
               <CardDescription>{props.location}</CardDescription>
@@ -274,7 +274,7 @@ export default function Home() {
               </div>
               <div>
                 <text>
-                  Bachiller. Nacional Superior N°6 Vicente López, 1998, Buenos Aires, Argentina.
+                  Bachiller. Nacional N°6 Vicente López, 1998, Buenos Aires, Argentina.
                 </text>
               </div>
             </li>

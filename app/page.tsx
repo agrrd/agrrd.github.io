@@ -10,14 +10,12 @@ import {
 
 import Link from 'next/link'
 
-import { CompanyExperience, } from '@/types'
 import { formatDate, dateDelta } from "@/lib/utils"
-import { contact, email, siteUrl, skilledAt, workExperience, } from "@/data"
+import { contact, email, siteUrl, skilledAt, } from "@/data"
 
-function WorkExperienceContainer(props: { workExperience: CompanyExperience[] }) {
+function WorkExperienceContainer() {
   return (
-    <div className="mt-2">
-
+    <>
       <CompanyExperienceComponent
         company="Independent Consultant"
         fromDate={new Date(2021, 0, 1)}
@@ -184,7 +182,7 @@ function WorkExperienceContainer(props: { workExperience: CompanyExperience[] })
         </ul>
 
       </CompanyExperienceComponent>
-    </div>
+    </>
   )
 }
 
@@ -202,26 +200,21 @@ function CompanyExperienceComponent(props: CompanyExperienceComponentProps) {
   const { years, months } = dateDelta(props.fromDate, props.toDate ?? new Date())
 
   return (
-    <div className={props.breakPage ? "md:flex md:flex-row break-after-page hover:bg-gray-200" : "md:flex md:flex-row hover:bg-gray-200"}>
-      <h1 className="md:text-right p-2 md:w-1/6 font-semibold text-md mr-4">
-        {props.company}
-      </h1>
+    <div className={props.breakPage ? "pt-6 md:flex md:flex-row break-after-page hover:bg-gray-200" : "pt-6 md:flex md:flex-row hover:bg-gray-200"}>
+      <div className="text-center md:w-1/6 font-light text-xs mt-1 mr-4">
+          {formatDate(props.fromDate)} - {formatDate(props.toDate) ?? "Present"}
+      </div>
 
-      <div className="md:w-5/6">
-        <div className="p-2 mb-4">
+
+      <div className="md:w-5/6 border-l-2">
           <div className="md:mx-2">
-            <div>{props.position}</div>
+            <div className="text-md">{props.position}</div>
             <div className="flex flex-row justify-between">
-              <CardDescription>{props.location}</CardDescription>
-              <CardDescription>
-                {formatDate(props.fromDate)} - {formatDate(props.toDate) ?? "Present"}
-                {years > 0 && <span className="mx-2">{`(${years} years)`}</span>}
-              </CardDescription>
+              <CardDescription>{props.company}</CardDescription>
             </div>
           </div>
 
           <div className="m-2 text-xs">{props.children}</div>
-        </div>
       </div>
     </div>
   )
@@ -316,7 +309,7 @@ export default function Home() {
             Work Experience
           </h2>
 
-          <WorkExperienceContainer workExperience={workExperience} />
+          <WorkExperienceContainer />
         </section>
 
       </div >

@@ -10,56 +10,219 @@ import {
 
 import Link from 'next/link'
 
-import { CompanyExperience, Position } from '@/types'
+import { CompanyExperience, } from '@/types'
 import { formatDate, dateDelta } from "@/lib/utils"
 import { contact, email, siteUrl, skilledAt, workExperience, } from "@/data"
 
 function WorkExperienceContainer(props: { workExperience: CompanyExperience[] }) {
   return (
-    <div className="mt-8">
-      {
-        props.workExperience.map((companyExperience, index) => (
-          <CompanyExperience key={index} experience={companyExperience} />
-        ))
-      }
+    <div className="mt-2">
+
+      <CompanyExperienceComponent
+        company="Independent Consultant"
+        fromDate={new Date(2021, 0, 1)}
+        toDate={undefined}
+        breakPage={false}
+        position="Network Specialist"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+      </CompanyExperienceComponent>
+
+      <CompanyExperienceComponent
+        company="Intraway Corporation"
+        fromDate={new Date(2015, 0, 1)}
+        toDate={new Date(2019, 0, 1)}
+        breakPage={true}
+        position="Solution Architect"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+        
+      </CompanyExperienceComponent>
+
+      <CompanyExperienceComponent
+        company="Intraway Corporation"
+        fromDate={new Date(2015, 0, 1)}
+        toDate={new Date(2019, 0, 1)}
+        breakPage={false}
+        position="Technical Account Manager"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+        
+      </CompanyExperienceComponent>
+
+      <CompanyExperienceComponent
+        company="Intraway Corporation"
+        fromDate={new Date(2015, 0, 1)}
+        toDate={new Date(2019, 0, 1)}
+        breakPage={false}
+        position="Support Engineer"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+        
+      </CompanyExperienceComponent>
+
+      <CompanyExperienceComponent
+        company="IBM Global Services Argentina"
+        fromDate={new Date(2015, 0, 1)}
+        toDate={new Date(2019, 0, 1)}
+        breakPage={false}
+        position="Unix / Data Protection Specialist"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+        
+      </CompanyExperienceComponent>
+
+      <CompanyExperienceComponent
+        company="Cablevision - Fibertel"
+        fromDate={new Date(2015, 0, 1)}
+        toDate={new Date(2019, 0, 1)}
+        breakPage={false}
+        position="NOC Engineer"
+        location="Buenos Aires, Argentina"
+      >
+        <text>
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur, eum neque, provident deserunt harum et ut omnis eveniet dicta magnam voluptatibus perferendis ea animi fugiat doloremque quod ipsa rerum pariatur?
+          Pariatur, repellendus explicabo maiores quasi optio neque quis suscipit doloremque labore ad aspernatur aliquam reprehenderit iusto rerum? Rerum reiciendis ad aperiam itaque. Accusamus culpa autem blanditiis tempore deleniti quidem earum.
+          Officia sunt veniam esse fuga animi a aliquid soluta consequuntur optio iusto fugiat repudiandae quo, inventore mollitia, ratione nulla temporibus eos tempore dolore ipsam! Molestiae dicta explicabo quisquam laboriosam provident!
+        </text>
+
+        <ul className="my-2 mx-8 list-disc">
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+          <li>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatem.
+          </li>
+        </ul>
+        
+      </CompanyExperienceComponent>
     </div>
   )
 }
 
-function CompanyExperience(props: { experience: CompanyExperience, }) {
+type CompanyExperienceComponentProps = {
+  company: string,
+  fromDate: Date,
+  toDate?: Date,
+  breakPage?: boolean,
+  position: string,
+  location: string,
+  children?: React.ReactNode
+}
+
+function CompanyExperienceComponent(props: CompanyExperienceComponentProps) {
+  const { years, months } = dateDelta(props.fromDate, props.toDate ?? new Date())
 
   return (
-    <div className={props.experience.breakPage ? "mb-4 flex flex-row break-after-page" : "mb-4 flex flex-row"}>
-      <h1 className="p-2 w-1/6 font-semibold text-right text-md mr-4">
-        {props.experience.company}
+    <div className={props.breakPage ? "flex flex-row break-after-page" : "flex flex-row"}>
+      <h1 className="text-right p-2 w-1/6 font-semibold text-md mr-4">
+        {props.company}
       </h1>
 
       <div className="w-5/6">
-        {
-          props.experience.positions.map((position, index) => {
-            const { years, months } = dateDelta(position.fromDate, position.toDate ?? new Date())
+        <div className="p-2 mb-4">
+          <div className="mx-2">
+            <div>{props.position}</div>
+            <div className="flex flex-row justify-between">
+              <CardDescription>{props.location}</CardDescription>
+              <CardDescription>
+                {formatDate(props.fromDate)} - {formatDate(props.toDate) ?? "Present"}
+                {years > 0 && <span className="mx-2">{`(${years} years)`}</span>}
+              </CardDescription>
+            </div>
+          </div>
 
-            return (
-              <div key={index} className="p-2 mb-4 hover:bg-gray-100">
-                <div className="mx-2">
-                  <div>{position.title}</div>
-                  <div className="flex flex-row justify-between">
-                    <CardDescription>{position.location}</CardDescription>
-                    <CardDescription>
-                      {formatDate(position.fromDate)} - {formatDate(position.toDate) ?? "Present"}
-                      {years > 0 && <span className="mx-2">{`(${years} years)`}</span>}
-                    </CardDescription>
-                  </div>
-                </div>
-
-                <div className="m-2 text-xs">{position.description}</div>
-              </div>
-            )
-
-          })
-        }
+          <div className="m-2 text-xs">{props.children}</div>
+        </div>
       </div>
-
     </div>
   )
 }
@@ -106,12 +269,24 @@ export default function Home() {
           {/*       background section */}
           <ul className="text-xs mt-6">
             <li className="flex flex-row gap-2 mb-2">
-              <div className="w-32 uppercase font-semibold">Education</div>
-              <div>Bachiller. Nacional Superior N°6 Vicente López, 1998, Buenos Aires, Argentina.</div>
+              <div className="w-24 uppercase font-semibold">
+                <text>Education</text>
+              </div>
+              <div>
+                <text>
+                  Bachiller. Nacional Superior N°6 Vicente López, 1998, Buenos Aires, Argentina.
+                </text>
+              </div>
             </li>
+
             <li className="flex flex-row gap-2">
-              <div className="w-32 uppercase font-semibold">Languages</div>
-              <div>English: Fluent. Spanish: Native</div>
+              <div className="w-24 uppercase font-semibold">
+                <text>Languages</text>
+              </div>
+              <div>
+                <text className="flex">English: Fluent</text>
+                <text className="flex">Spanish: Native</text>
+              </div>
             </li>
           </ul>
         </section>
